@@ -5,6 +5,8 @@ from datetime import datetime
 """
 script will generate a .tgz archive from web_static
 """
+
+
 def do_pack():
     """
     function will convert the file into the .tgz format
