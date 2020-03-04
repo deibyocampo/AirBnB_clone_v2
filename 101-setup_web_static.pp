@@ -48,12 +48,12 @@ file { '/data/web_static/shared':
   require => File['/data/web_static']
 }
 
-file { 'data/web_static/current':
+file { '/data/web_static/current':
   ensure => 'link',
-  target  => 'data/web_static/releases/test',
+  target  => '/data/web_static/releases/test',
   owner   => 'ubuntu',
   group   => 'ubuntu',
-  require => File['/data/web_static', 'data/web_static/releases/test']
+  require => File['/data/web_static', '/data/web_static/releases/test']
 }
 
 exec { 'apt-get update':
@@ -67,7 +67,7 @@ package { 'nginx':
 }
 
 exec { 'retrieve_cfg':
-  command => 'sed -i "/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}" /etc/nginx/sites-available/default',
+  command => 'sudo sed -i "/listen 80 default_server/a location /hbnb_static/ { alias /data/web_static/current/;}" /etc/nginx/sites-available/default',
   path    => '/usr/bin',
   require => Package['nginx']
 }
